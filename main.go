@@ -37,7 +37,7 @@ func main() {
 
 	flag.StringVar(&name, "name", "", "Bot's username")
 	flag.StringVar(&server, "server", "", "Server to connect")
-	flag.StringVar(&server, "tag", "", "Server's tag, which used to calculate the password bot use. ")
+	flag.StringVar(&tag, "tag", "", "Server's tag, which used to calculate the password bot use. ")
 	flag.StringVar(&secret, "secret", "", "Secret used to calc password")
 	flag.BoolVar(&color, "color", false, "Turn it on if you want to see colors in messages. ")
 	flag.Parse()
