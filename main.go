@@ -25,6 +25,7 @@ var chatHandler *msg.Manager
 var playerList *playerlist.PlayerList
 var name string
 var server string
+var tag string
 var secret string
 var color bool
 var password string
@@ -36,6 +37,7 @@ func main() {
 
 	flag.StringVar(&name, "name", "", "Bot's username")
 	flag.StringVar(&server, "server", "", "Server to connect")
+	flag.StringVar(&server, "Tag", "", "Server's tag, which used to calculate the password bot use. ")
 	flag.StringVar(&secret, "secret", "", "Secret used to calc password")
 	flag.BoolVar(&color, "color", false, "Turn it on if you want to see colors in messages. ")
 	flag.Parse()
@@ -54,6 +56,13 @@ func main() {
 			return
 		}
 	}
+	if tag == "" {
+		fmt.Print("Input the server's tag: ")
+		_, err := fmt.Scanln(&server)
+		if err != nil {
+			return
+		}
+	}
 	if secret == "" {
 		fmt.Print("Input your secret: ")
 		_, err := fmt.Scanln(&secret)
@@ -64,9 +73,10 @@ func main() {
 
 	log.Println("Name: " + name)
 	log.Println("Server: " + server)
+	log.Println("Tag: " + tag)
 	log.Println("Secret: " + secret)
 
-	password = calcMd5(name + server + secret)[:30]
+	password = calcMd5(name + tag + secret)[:30]
 
 	log.Println(password)
 
